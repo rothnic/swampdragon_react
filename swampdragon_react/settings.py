@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'swampdragon_react.urls'
 
-WSGI_APPLICATION = 'swampdragon_test.wsgi.application'
+WSGI_APPLICATION = 'swampdragon_react.wsgi.application'
 
 
 # Database

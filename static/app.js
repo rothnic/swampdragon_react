@@ -2,11 +2,8 @@
  * Created by rothnic on 12/25/14.
  */
 
-// For any third party dependencies, like jQuery, place them in the lib folder.
-
-// Configure loading modules from the lib directory,
-// except for 'app' ones, which are in a sibling
-// directory.
+// Main App Loader Config
+// swampdragon, settings, and datamapper aren't AMD modules so are in global namespace
 requirejs.config({
     baseUrl: '../static/',
     paths: {
@@ -28,6 +25,6 @@ requirejs.config({
     }
 });
 
-// Start loading the main app file. Put all of
-// your application logic in there.
+// Require the Server App main execution point
+// This then means that anything it requires will be loaded as well
 requirejs(['server_app/main']);
