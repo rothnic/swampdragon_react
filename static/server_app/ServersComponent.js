@@ -4,6 +4,8 @@
 
 require(['React', 'dragon', 'datamapper'], function (React, dragon) {
 
+    var channel = 'servers';
+
     var ServersComponent = React.createClass({
 
         // React needs initial valid states
@@ -19,7 +21,7 @@ require(['React', 'dragon', 'datamapper'], function (React, dragon) {
         componentWillMount: function () {
 
             dragon.onReady(function () {
-                dragon.subscribe('server-item', 'servers', {server_list__id: 1}).then(function (response) {
+                dragon.subscribe('server-item', channel, {server_list__id: 1}).then(function (response) {
                     console.log('Subscription Response:');
                     console.log(response);
                     this.setState({dataMapper: new DataMapper(response)});
@@ -35,8 +37,19 @@ require(['React', 'dragon', 'datamapper'], function (React, dragon) {
 
                 dragon.onChannelMessage(function (channels, message) {
                     console.log('New Message:');
-                    if (channels.indexOf('servers') > -1) {
-                        this.state.dataMapper.mapData(this.state.serverItems, message);
+                    console.log(message);
+
+                    if (channel.indexOf(channels) > -1) {
+                        console.log('Applying the new data into the existing data.');
+
+                        // We must copy the array so that it can be mutated
+                        var tmpItems = this.state.serverItems.slice(0);
+
+                        // DataMapper does its thing on the copied array
+                        this.state.dataMapper.mapData(tmpItems, message);
+
+                        // Tell react to apply the changes to serverItems
+                        this.setState({serverItems: tmpItems});
                     }
                 }.bind(this));
 
