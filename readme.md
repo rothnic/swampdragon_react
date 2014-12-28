@@ -30,6 +30,6 @@ able to operate independently of having the backend, if we can provide mock data
 
 ## ToDo
 * Move static javascript dependencies to bower
-* Revisit dragon-react module
+* ~~Revisit dragon-react module~~ Using VanillaDragon
 * Revisit dependency loading (require vs webpack, etc)
 * Revisit architecture to incorporate flux concepts

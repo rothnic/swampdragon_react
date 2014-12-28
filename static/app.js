@@ -12,15 +12,22 @@ requirejs.config({
         jsx: 'jsx',
         server_app: 'server_app',
         settings: 'http://localhost:9999/settings',
-        swampdragon: 'swampdragon/js/swampdragon',
+        dragon: 'swampdragon/js/swampdragon',
+        dragon_vanilla: 'swampdragon/js/swampdragon-vanilla',
         datamapper: 'swampdragon/js/datamapper'
     },
     shim: {
-        'swampdragon': {
-            deps: ['settings']
+        'dragon': {
+            deps: ['settings'],
+            exports: 'SwampDragon'
         },
         'datamapper': {
-            deps: ['swampdragon']
+            deps: ['dragon'],
+            exports: 'DataMapper'
+        },
+        'dragon_vanilla': {
+            deps: ['dragon', 'settings'],
+            exports: 'VanillaDragon'
         }
     }
 });
